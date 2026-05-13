@@ -4,522 +4,207 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ariel Palermo — Meta Ads Manager</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
   :root {
     --green: #3B6D11;
     --green-light: #639922;
-    --green-pale: #EAF3DE;
-    --green-mid: #C0DD97;
+    --green-pale: rgba(99,153,34,0.12);
     --orange: #BA7517;
     --orange-light: #EF9F27;
-    --orange-pale: #FAEEDA;
-    --orange-mid: #FAC775;
-    --dark: #1a1a18;
-    --dark2: #242420;
-    --dark3: #2e2e2a;
+    --dark: #111110;
+    --dark2: #1c1c1a;
     --text: #f0ede6;
-    --text-muted: #a09d96;
-    --text-dim: #6b6862;
+    --text-muted: #9a9792;
+    --text-dim: #5a5855;
     --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.13);
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
+  html { scroll-behavior: smooth; }
   body {
-    background: var(--dark);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    line-height: 1.7;
-    min-height: 100vh;
+    background: var(--dark); color: var(--text);
+    font-family: 'DM Sans', sans-serif; font-weight: 300;
+    line-height: 1.7; overflow-x: hidden;
   }
-
-  /* NAV */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 1.25rem 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(26,26,24,0.85);
-    backdrop-filter: blur(12px);
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.1rem 2rem; display: flex; justify-content: center;
+    background: rgba(17,17,16,0.9); backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border);
   }
-  .nav-logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 1.1rem;
-    letter-spacing: -0.02em;
-    color: var(--text);
-  }
-  .nav-logo span { color: var(--orange-light); }
-  .nav-links { display: flex; gap: 2rem; }
+  .nav-links { display: flex; gap: 1.75rem; }
   .nav-links a {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    text-decoration: none;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    transition: color 0.2s;
+    font-size: 0.78rem; color: var(--text-dim); text-decoration: none;
+    letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;
   }
-  .nav-links a:hover { color: var(--green-light); }
+  .nav-links a:hover { color: var(--orange-light); }
 
   /* HERO */
   .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 8rem 3rem 4rem;
-    position: relative;
-    overflow: hidden;
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center;
+    padding: 7rem 2rem 4rem; position: relative; overflow: hidden;
   }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -200px; right: -200px;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(99,153,34,0.12) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: -100px; left: 20%;
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(239,159,39,0.08) 0%, transparent 70%);
-    pointer-events: none;
-  }
+  .glow { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(80px); }
+  .glow-1 { width: 500px; height: 400px; top: -80px; left: 50%; transform: translateX(-50%); background: rgba(99,153,34,0.07); }
+  .glow-2 { width: 280px; height: 280px; bottom: 0; right: -40px; background: rgba(239,159,39,0.06); }
+
   .hero-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--green-light);
-    margin-bottom: 2rem;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--green-light); margin-bottom: 1.75rem;
+    border: 1px solid rgba(99,153,34,0.25); background: rgba(99,153,34,0.08);
+    padding: 5px 14px; border-radius: 100px;
   }
   .hero-tag::before {
-    content: '';
-    width: 24px; height: 1px;
-    background: var(--green-light);
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green-light); animation: pulse 2s infinite;
   }
-  h1 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(3.5rem, 8vw, 7rem);
-    line-height: 0.95;
-    letter-spacing: -0.03em;
-    margin-bottom: 1.5rem;
-  }
-  h1 .accent { color: var(--orange-light); }
-  h1 .line2 { color: var(--green-light); }
-  .hero-sub {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    max-width: 520px;
-    margin-bottom: 3rem;
-    font-weight: 300;
-  }
-  .hero-cta {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 0.9rem 2rem;
-    background: var(--green-light);
-    color: var(--dark);
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 0.85rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background 0.2s, transform 0.15s;
-  }
-  .btn-primary:hover { background: var(--green); transform: translateY(-2px); }
-  .btn-outline {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 0.9rem 2rem;
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
-    font-size: 0.85rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: border-color 0.2s, color 0.2s, transform 0.15s;
-  }
-  .btn-outline:hover { border-color: var(--orange-light); color: var(--orange-light); transform: translateY(-2px); }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-  .hero-stats {
-    display: flex;
-    gap: 3rem;
-    margin-top: 5rem;
-    padding-top: 3rem;
-    border-top: 1px solid var(--border);
+  h1 {
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: clamp(3rem, 11vw, 6.5rem);
+    line-height: 0.93; letter-spacing: -0.03em; margin-bottom: 1.5rem;
   }
-  .stat-num {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 2rem;
-    color: var(--orange-light);
-    line-height: 1;
+  h1 .n1 { display: block; color: var(--text); }
+  h1 .nick {
+    display: block;
+    font-size: clamp(1.1rem, 3.5vw, 1.8rem);
+    font-weight: 600; letter-spacing: 0.01em;
+    color: var(--orange-light); margin: 0.15em 0;
+    font-style: italic;
   }
-  .stat-label {
-    font-size: 0.8rem;
-    color: var(--text-dim);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    margin-top: 4px;
+  h1 .n2 { display: block; color: var(--green-light); }
+  h1 .dot { color: var(--orange-light); }
+
+  .hero-sub {
+    font-size: clamp(0.92rem, 2.5vw, 1.05rem); color: var(--text-muted);
+    max-width: 440px; margin: 0 auto 2.5rem; font-style: italic;
   }
+  .hero-cta { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+  .btn-p {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 0.85rem 1.75rem; background: var(--green-light); color: #111;
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem;
+    letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
+    border-radius: 6px; transition: background 0.2s, transform 0.15s;
+  }
+  .btn-p:hover { background: var(--green); transform: translateY(-2px); }
+  .btn-o {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 0.85rem 1.75rem; border: 1px solid var(--border-hover); color: var(--text-muted);
+    font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.82rem;
+    letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
+    border-radius: 6px; transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+  .btn-o:hover { border-color: var(--orange-light); color: var(--orange-light); transform: translateY(-2px); }
+
+  /* STATS */
+  .useless { margin-top: 4rem; padding-top: 2.5rem; border-top: 1px solid var(--border); width: 100%; max-width: 660px; }
+  .useless-label { font-size: 0.67rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 1.1rem; }
+  .sgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; }
+  @media(min-width:560px){ .sgrid { grid-template-columns: repeat(6, 1fr); } }
+  .scard {
+    background: var(--dark2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 0.9rem 0.6rem;
+    transition: border-color 0.2s, transform 0.2s; cursor: default;
+  }
+  .scard:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .snum { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.65rem; line-height: 1; margin-bottom: 4px; }
+  .snum.g { color: var(--green-light); }
+  .snum.o { color: var(--orange-light); }
+  .sdesc { font-size: 0.67rem; color: var(--text-dim); line-height: 1.35; }
 
   /* SECTIONS */
-  section {
-    padding: 6rem 3rem;
-    max-width: 1100px;
-    margin: 0 auto;
+  .wrap { max-width: 680px; margin: 0 auto; padding: 5rem 2rem; text-align: center; }
+  .slabel {
+    font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--orange-light); margin-bottom: 0.6rem;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
   }
-  .section-label {
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--orange-light);
-    margin-bottom: 0.75rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .section-label::after {
-    content: '';
-    flex: 1;
-    max-width: 40px;
-    height: 1px;
-    background: var(--orange-light);
-    opacity: 0.5;
-  }
+  .slabel::before,.slabel::after { content:''; width:22px; height:1px; background:var(--orange-light); opacity:0.4; }
   h2 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(2rem, 4vw, 3rem);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin-bottom: 3rem;
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: clamp(1.8rem, 5vw, 2.7rem);
+    line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 2rem;
   }
+  hr.div { border: none; border-top: 1px solid var(--border); max-width: 680px; margin: 0 auto; }
 
-  /* SOBRE MI */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: start;
+  .about-box {
+    background: var(--dark2); border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.75rem; text-align: left;
   }
-  .about-text p {
-    color: var(--text-muted);
-    font-size: 1.05rem;
-    margin-bottom: 1.25rem;
-  }
-  .about-text p strong {
-    color: var(--text);
-    font-weight: 500;
-  }
-  .about-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .about-card {
-    background: var(--dark2);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.25rem 1.5rem;
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    transition: border-color 0.2s;
-  }
-  .about-card:hover { border-color: rgba(99,153,34,0.3); }
-  .about-card-icon {
-    width: 40px; height: 40px;
-    border-radius: 8px;
-    background: var(--green-pale);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    flex-shrink: 0;
-  }
-  .about-card-icon.orange { background: var(--orange-pale); }
-  .about-card-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 0.9rem;
-    color: var(--text);
-    margin-bottom: 2px;
-  }
-  .about-card-desc {
-    font-size: 0.82rem;
-    color: var(--text-dim);
-  }
+  .about-box p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0.9rem; }
+  .about-box p:last-child { margin-bottom: 0; }
+  .about-box strong { color: var(--text); font-weight: 500; }
 
-  /* EXPERIENCIA */
-  .exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
-  .exp-card {
-    background: var(--dark2);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 2rem 2.5rem;
-    position: relative;
-    overflow: hidden;
+  .elist { display: flex; flex-direction: column; gap: 0.9rem; text-align: left; }
+  .ecard {
+    background: var(--dark2); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.6rem;
     transition: border-color 0.25s, transform 0.2s;
   }
-  .exp-card:hover { border-color: rgba(239,159,39,0.25); transform: translateY(-3px); }
-  .exp-card.featured { border-color: rgba(99,153,34,0.35); }
-  .exp-card.featured::before {
-    content: 'ACTUAL';
-    position: absolute;
-    top: 1.5rem; right: 1.5rem;
-    font-family: 'Syne', sans-serif;
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    color: var(--green-light);
-    background: rgba(99,153,34,0.12);
-    border: 1px solid rgba(99,153,34,0.3);
-    padding: 3px 10px;
-    border-radius: 100px;
+  .ecard:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .ecard.feat { border-color: rgba(99,153,34,0.3); }
+  .badge {
+    display: inline-block; font-size: 0.61rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 100px; margin-bottom: 0.7rem;
   }
-  .exp-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-    gap: 2rem;
-  }
-  .exp-company {
-    font-size: 0.8rem;
-    color: var(--text-dim);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-  .exp-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: var(--text);
-  }
-  .exp-date {
-    font-size: 0.8rem;
-    color: var(--text-dim);
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .exp-bullets {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .exp-bullets li {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    padding-left: 1.25rem;
-    position: relative;
-  }
-  .exp-bullets li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--green-light);
-    font-size: 0.75rem;
-    top: 3px;
-  }
+  .badge.g { color:var(--green-light); background:var(--green-pale); border:1px solid rgba(99,153,34,0.25); }
+  .badge.gr { color:var(--text-dim); background:rgba(255,255,255,0.04); border:1px solid var(--border); }
+  .eco { font-size:0.76rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:2px; }
+  .etit { font-family:'Syne',sans-serif; font-weight:700; font-size:1.05rem; color:var(--text); margin-bottom:2px; }
+  .edate { font-size:0.76rem; color:var(--text-dim); margin-bottom:0.9rem; }
+  .ebullets { list-style:none; display:flex; flex-direction:column; gap:4px; }
+  .ebullets li { font-size:0.86rem; color:var(--text-muted); padding-left:1rem; position:relative; line-height:1.5; }
+  .ebullets li::before { content:'→'; position:absolute; left:0; color:var(--green-light); font-size:0.68rem; top:4px; }
 
-  /* HERRAMIENTAS */
-  .tools-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1rem;
-  }
-  .tool-category {
-    background: var(--dark2);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.5rem;
-    transition: border-color 0.2s;
-  }
-  .tool-category:hover { border-color: rgba(239,159,39,0.2); }
-  .tool-cat-title {
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--orange-light);
-    margin-bottom: 1rem;
-    font-weight: 500;
-  }
-  .tool-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  .tool-tag {
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    padding: 4px 12px;
-  }
-  .tool-tag.hl {
-    color: var(--green-light);
-    background: rgba(99,153,34,0.1);
-    border-color: rgba(99,153,34,0.25);
-  }
+  .tgrid { display:grid; grid-template-columns:1fr 1fr; gap:0.65rem; text-align:left; }
+  .tcat { background:var(--dark2); border:1px solid var(--border); border-radius:12px; padding:1.1rem; transition:border-color 0.2s; }
+  .tcat:hover { border-color:var(--border-hover); }
+  .tcatl { font-size:0.64rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--orange-light); margin-bottom:0.6rem; }
+  .tags { display:flex; flex-wrap:wrap; gap:4px; }
+  .tag { font-size:0.72rem; color:var(--text-muted); background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:100px; padding:3px 9px; }
+  .tag.hl { color:var(--green-light); background:var(--green-pale); border-color:rgba(99,153,34,0.25); }
 
-  /* EDUCACION */
-  .edu-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1rem;
-  }
-  .edu-card {
-    background: var(--dark2);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.5rem;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-  .edu-card:hover { border-color: rgba(99,153,34,0.25); transform: translateY(-2px); }
-  .edu-badge {
-    display: inline-block;
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 100px;
-    margin-bottom: 0.75rem;
-    font-weight: 500;
-  }
-  .edu-badge.green { background: rgba(99,153,34,0.12); color: var(--green-light); border: 1px solid rgba(99,153,34,0.3); }
-  .edu-badge.orange { background: rgba(239,159,39,0.12); color: var(--orange-light); border: 1px solid rgba(239,159,39,0.3); }
-  .edu-badge.gray { background: rgba(255,255,255,0.04); color: var(--text-dim); border: 1px solid var(--border); }
-  .edu-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--text);
-    margin-bottom: 4px;
-  }
-  .edu-place {
-    font-size: 0.82rem;
-    color: var(--text-dim);
-  }
+  .edugrid { display:flex; flex-direction:column; gap:0.65rem; text-align:left; }
+  .educard { background:var(--dark2); border:1px solid var(--border); border-radius:12px; padding:1.15rem 1.4rem; transition:border-color 0.2s,transform 0.2s; }
+  .educard:hover { border-color:var(--border-hover); transform:translateY(-2px); }
+  .edutit { font-family:'Syne',sans-serif; font-weight:700; font-size:0.93rem; color:var(--text); margin-bottom:2px; }
+  .edusub { font-size:0.78rem; color:var(--text-dim); }
 
-  /* CONTACTO */
-  .contact-box {
-    background: var(--dark2);
-    border: 1px solid rgba(99,153,34,0.25);
-    border-radius: 20px;
-    padding: 4rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
+  .cbox {
+    background:var(--dark2); border:1px solid rgba(99,153,34,0.2);
+    border-radius:20px; padding:3rem 1.75rem; position:relative; overflow:hidden;
   }
-  .contact-box::before {
-    content: '';
-    position: absolute;
-    top: -100px; left: 50%;
-    transform: translateX(-50%);
-    width: 400px; height: 300px;
-    background: radial-gradient(circle, rgba(99,153,34,0.08) 0%, transparent 70%);
-    pointer-events: none;
+  .cbox::before {
+    content:''; position:absolute; top:-60px; left:50%; transform:translateX(-50%);
+    width:280px; height:180px;
+    background:radial-gradient(circle,rgba(99,153,34,0.08) 0%,transparent 70%);
+    pointer-events:none;
   }
-  .contact-box h2 { margin-bottom: 1rem; }
-  .contact-box p {
-    color: var(--text-muted);
-    font-size: 1rem;
-    margin-bottom: 2.5rem;
-    max-width: 480px;
-    margin-left: auto;
-    margin-right: auto;
+  .cbox h2 { margin-bottom:0.6rem; }
+  .cbox p { color:var(--text-muted); font-size:0.92rem; margin-bottom:1.75rem; font-style:italic; }
+  .citems { display:flex; flex-direction:column; gap:0.55rem; align-items:center; }
+  .citem {
+    display:flex; align-items:center; gap:10px; font-size:0.86rem; color:var(--text-muted);
+    background:rgba(255,255,255,0.04); border:1px solid var(--border);
+    border-radius:8px; padding:0.6rem 1.2rem; width:100%; max-width:300px; justify-content:center;
   }
-  .contact-links {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-  .contact-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 0.75rem 1.25rem;
-  }
-  .contact-item span { color: var(--text); }
+  .citem span { color:var(--text); }
 
-  /* FOOTER */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 2rem 3rem;
-    text-align: center;
-    font-size: 0.8rem;
-    color: var(--text-dim);
-  }
+  footer { border-top:1px solid var(--border); padding:1.75rem 2rem; text-align:center; font-size:0.73rem; color:var(--text-dim); }
 
-  /* DIVIDER */
-  .divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 0 3rem;
-  }
-
-  /* SCROLL ANIMATIONS */
-  .fade-in {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { gap: 1rem; }
-    .hero { padding: 7rem 1.5rem 3rem; }
-    section { padding: 4rem 1.5rem; }
-    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
-    .exp-card { padding: 1.5rem; }
-    .contact-box { padding: 2.5rem 1.5rem; }
-    .divider { margin: 0 1.5rem; }
-  }
+  .fi { opacity:0; transform:translateY(18px); transition:opacity 0.5s ease,transform 0.5s ease; }
+  .fi.v { opacity:1; transform:translateY(0); }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-logo">AP<span>.</span></div>
   <div class="nav-links">
     <a href="#sobre-mi">Sobre mí</a>
     <a href="#experiencia">Experiencia</a>
@@ -529,230 +214,207 @@
 </nav>
 
 <div class="hero">
-  <div class="hero-tag">Meta Ads Manager · Performance Marketing</div>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <div class="hero-tag">Disponible para trabajar</div>
+
   <h1>
-    Ariel<br>
-    <span class="line2">Palermo</span><span class="accent">.</span>
+    <span class="n1">Ariel</span>
+    <span class="nick">"Ossy"</span>
+    <span class="n2">Palermo<span class="dot">.</span></span>
   </h1>
-  <p class="hero-sub">
-    Gestiono campañas en Meta Ads para marcas reales. Segmentación, optimización y reportes — con foco en resultados concretos.
-  </p>
+
+  <p class="hero-sub">Meta Ads Manager. Gestiono campañas, segmento audiencias y optimizo métricas.</p>
+
   <div class="hero-cta">
-    <a href="#contacto" class="btn-primary">Hablemos →</a>
-    <a href="#experiencia" class="btn-outline">Ver experiencia</a>
+    <a href="#contacto" class="btn-p">Hablemos →</a>
+    <a href="#experiencia" class="btn-o">Ver experiencia</a>
   </div>
-  <div class="hero-stats">
-    <div>
-      <div class="stat-num">5+</div>
-      <div class="stat-label">Clientes activos</div>
-    </div>
-    <div>
-      <div class="stat-num">3</div>
-      <div class="stat-label">Rubros distintos</div>
-    </div>
-    <div>
-      <div class="stat-num">$55k</div>
-      <div class="stat-label">Pauta diaria operada (ARS)</div>
-    </div>
-    <div>
-      <div class="stat-num">2+</div>
-      <div class="stat-label">Años en marketing digital</div>
+
+  <div class="useless">
+    <div class="useless-label">Datos relevantes e irrelevantes en igual proporción</div>
+    <div class="sgrid">
+      <div class="scard">
+        <div class="snum g">4</div>
+        <div class="sdesc">años en marketing digital</div>
+      </div>
+      <div class="scard">
+        <div class="snum g">8</div>
+        <div class="sdesc">clientes activos</div>
+      </div>
+      <div class="scard">
+        <div class="snum o">85</div>
+        <div class="sdesc">goles en un año</div>
+      </div>
+      <div class="scard">
+        <div class="snum o">1</div>
+        <div class="sdesc">vino por asado</div>
+      </div>
+      <div class="scard">
+        <div class="snum g">0</div>
+        <div class="sdesc">remeras rojas</div>
+      </div>
+      <div class="scard">
+        <div class="snum o">2</div>
+        <div class="sdesc">viajes a Disney</div>
+      </div>
     </div>
   </div>
 </div>
 
-<hr class="divider">
+<hr class="div">
 
-<section id="sobre-mi">
-  <div class="section-label">Sobre mí</div>
-  <h2>Marketing con<br>foco en resultados</h2>
-  <div class="about-grid">
-    <div class="about-text fade-in">
-      <p>Soy <strong>Ariel Palermo</strong>, de General Pacheco, Tigre. Me dedico a la gestión de campañas en <strong>Meta Ads</strong> para clientes de distintos rubros.</p>
-      <p>Empecé en el mundo del marketing digital como Community Manager y estratega de contenido. Con el tiempo, me fui especializando en la parte de <strong>performance</strong>: configuración de campañas, segmentación de audiencias, monitoreo de métricas y optimización.</p>
-      <p>Actualmente manejo campañas activas con distintos objetivos: reconocimiento de marca, conversión y generación de base de datos.</p>
-    </div>
-    <div class="about-cards fade-in">
-      <div class="about-card">
-        <div class="about-card-icon">📊</div>
-        <div>
-          <div class="about-card-title">Gestión de campañas</div>
-          <div class="about-card-desc">Configuración, segmentación y optimización en Meta Ads Manager</div>
-        </div>
-      </div>
-      <div class="about-card">
-        <div class="about-card-icon orange">📈</div>
-        <div>
-          <div class="about-card-title">Reportes y métricas</div>
-          <div class="about-card-desc">Monitoreo diario de CTR, CPC, alcance y reportes semanales</div>
-        </div>
-      </div>
-      <div class="about-card">
-        <div class="about-card-icon">🎯</div>
-        <div>
-          <div class="about-card-title">Estrategia de contenido</div>
-          <div class="about-card-desc">Coordinación de creatividades alineadas a cada objetivo de campaña</div>
-        </div>
-      </div>
-    </div>
+<div class="wrap" id="sobre-mi">
+  <div class="slabel">Sobre mí</div>
+  <h2>¿Quién soy?</h2>
+  <div class="about-box fi">
+    <p>Soy <strong>Ariel Palermo</strong>, de General Pacheco, Tigre. Me dedico a la gestión de campañas en <strong>Meta Ads</strong> para clientes de distintos rubros.</p>
+    <p>Empecé en el mundo del marketing digital como Community Manager y estratega de contenido. Con el tiempo me fui especializando en la parte de <strong>performance</strong>: configuración de campañas, segmentación de audiencias, monitoreo de métricas y optimización.</p>
+    <p>Actualmente manejo campañas activas con distintos objetivos: reconocimiento de marca, conversión y generación de base de datos. Y sigo aprendiendo.</p>
   </div>
-</section>
+</div>
 
-<hr class="divider">
+<hr class="div">
 
-<section id="experiencia">
-  <div class="section-label">Experiencia</div>
-  <h2>Dónde estuve<br>y qué hice</h2>
-  <div class="exp-list">
-    <div class="exp-card featured fade-in">
-      <div class="exp-header">
-        <div>
-          <div class="exp-company">Freelance</div>
-          <div class="exp-title">Meta Ads Manager</div>
-        </div>
-        <div class="exp-date">Mayo 2025 – presente</div>
-      </div>
-      <ul class="exp-bullets">
+<div class="wrap" id="experiencia">
+  <div class="slabel">Experiencia</div>
+  <h2>Lo que hice<br>y lo que hago</h2>
+  <div class="elist">
+    <div class="ecard feat fi">
+      <div class="badge g">● Activo</div>
+      <div class="eco">Freelance</div>
+      <div class="etit">Meta Ads Manager</div>
+      <div class="edate">Mayo 2025 – presente</div>
+      <ul class="ebullets">
         <li>Gestión de campañas activas en Meta Ads para clientes de distintos rubros: alimentos y bebidas, artistas musicales y estudios de producción.</li>
         <li>Configuración de campañas con distintos objetivos: reconocimiento de marca, conversión y generación de base de datos.</li>
         <li>Segmentación de audiencias y carga de creatividades alineadas a la estrategia de cada cliente.</li>
         <li>Monitoreo diario de métricas clave (CTR, CPC, alcance) y reporte semanal de resultados.</li>
       </ul>
     </div>
-    <div class="exp-card fade-in">
-      <div class="exp-header">
-        <div>
-          <div class="exp-company">Un Metro Adelantado — Agencia de Marketing</div>
-          <div class="exp-title">Estratega de Contenido Digital</div>
-        </div>
-        <div class="exp-date">Marzo 2023 – presente</div>
-      </div>
-      <ul class="exp-bullets">
-        <li>Gestión de redes sociales para marcas como Noblex y Axion, con foco en comunicación consistente y análisis de métricas.</li>
-        <li>Producción de contenido para el programa "Partido Chivo" (Canal Comba): coordinación en vivo y adaptación multiplataforma.</li>
+    <div class="ecard fi">
+      <div class="badge gr">Agencia</div>
+      <div class="eco">Un Metro Adelantado</div>
+      <div class="etit">Estratega de Contenido Digital</div>
+      <div class="edate">Marzo 2023 – presente</div>
+      <ul class="ebullets">
+        <li>Gestión de redes sociales para marcas como Noblex y Axion.</li>
+        <li>Producción de contenido para "Partido Chivo" (Canal Comba): coordinación en vivo y adaptación multiplataforma.</li>
         <li>Participación en equipo creativo para campañas publicitarias.</li>
       </ul>
     </div>
-    <div class="exp-card fade-in">
-      <div class="exp-header">
-        <div>
-          <div class="exp-company">La Emprendeneta — Creación de Contenido</div>
-          <div class="exp-title">Community Manager y Creador de Contenido</div>
-        </div>
-        <div class="exp-date">Marzo 2023 – presente</div>
-      </div>
-      <ul class="exp-bullets">
+    <div class="ecard fi">
+      <div class="badge gr">Contenido</div>
+      <div class="eco">La Emprendeneta</div>
+      <div class="etit">Community Manager y Creador de Contenido</div>
+      <div class="edate">Marzo 2023 – presente</div>
+      <ul class="ebullets">
         <li>Manejo de redes sociales para emprendedores y PyMEs.</li>
         <li>Producción, grabación y edición de videos para redes sociales.</li>
       </ul>
     </div>
   </div>
-</section>
+</div>
 
-<hr class="divider">
+<hr class="div">
 
-<section id="herramientas">
-  <div class="section-label">Skills</div>
-  <h2>Herramientas<br>que uso</h2>
-  <div class="tools-grid">
-    <div class="tool-category fade-in">
-      <div class="tool-cat-title">// Meta Ads</div>
-      <div class="tool-tags">
-        <span class="tool-tag hl">Meta Ads Manager</span>
-        <span class="tool-tag hl">Meta Business Suite</span>
-        <span class="tool-tag">Segmentación de audiencias</span>
-        <span class="tool-tag">Campañas de conversión</span>
-        <span class="tool-tag">CTR · CPC · Alcance</span>
+<div class="wrap" id="herramientas">
+  <div class="slabel">Skills</div>
+  <h2>Con qué trabajo</h2>
+  <div class="tgrid">
+    <div class="tcat fi">
+      <div class="tcatl">// Meta & Google Ads</div>
+      <div class="tags">
+        <span class="tag hl">Meta Ads Manager</span>
+        <span class="tag hl">Meta Business Suite</span>
+        <span class="tag hl">Google Ads</span>
+        <span class="tag">Segmentación</span>
+        <span class="tag">CTR · CPC</span>
       </div>
     </div>
-    <div class="tool-category fade-in">
-      <div class="tool-cat-title">// Contenido & Diseño</div>
-      <div class="tool-tags">
-        <span class="tool-tag hl">Canva</span>
-        <span class="tool-tag hl">CapCut</span>
-        <span class="tool-tag">Fotografía</span>
-        <span class="tool-tag">YouTube Studio</span>
+    <div class="tcat fi">
+      <div class="tcatl">// Contenido & RRSS</div>
+      <div class="tags">
+        <span class="tag hl">Canva</span>
+        <span class="tag hl">CapCut</span>
+        <span class="tag">Instagram</span>
+        <span class="tag">Twitter / X</span>
+        <span class="tag">TikTok</span>
+        <span class="tag">YouTube Studio</span>
+        <span class="tag">Fotografía</span>
       </div>
     </div>
-    <div class="tool-category fade-in">
-      <div class="tool-cat-title">// Productividad & IA</div>
-      <div class="tool-tags">
-        <span class="tool-tag hl">ChatGPT</span>
-        <span class="tool-tag hl">Gemini</span>
-        <span class="tool-tag">Paquete Office</span>
+    <div class="tcat fi">
+      <div class="tcatl">// IA & Office</div>
+      <div class="tags">
+        <span class="tag hl">ChatGPT</span>
+        <span class="tag hl">Claude</span>
+        <span class="tag">Gemini</span>
+        <span class="tag">Paquete Office</span>
       </div>
     </div>
-    <div class="tool-category fade-in">
-      <div class="tool-cat-title">// Idiomas</div>
-      <div class="tool-tags">
-        <span class="tool-tag hl">Español — nativo</span>
-        <span class="tool-tag">Inglés — intermedio</span>
+    <div class="tcat fi">
+      <div class="tcatl">// Idiomas</div>
+      <div class="tags">
+        <span class="tag hl">Español — nativo</span>
+        <span class="tag">Inglés — intermedio</span>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<hr class="divider">
+<hr class="div">
 
-<section id="educacion">
-  <div class="section-label">Educación</div>
+<div class="wrap" id="educacion">
+  <div class="slabel">Educación</div>
   <h2>Formación</h2>
-  <div class="edu-grid">
-    <div class="edu-card fade-in">
-      <div class="edu-badge green">Cursando</div>
-      <div class="edu-title">Publicidad en Redes Avanzado: Meta y Google Ads</div>
-      <div class="edu-place">Coderhouse</div>
+  <div class="edugrid">
+    <div class="educard fi">
+      <div class="badge g">Cursando</div>
+      <div class="edutit">Publicidad en Redes Avanzado: Meta y Google Ads</div>
+      <div class="edusub">Coderhouse</div>
     </div>
-    <div class="edu-card fade-in">
-      <div class="edu-badge orange">Finalizado 2024</div>
-      <div class="edu-title">Community Manager & Publicidad</div>
-      <div class="edu-place">Coderhouse</div>
+    <div class="educard fi">
+      <div class="badge gr">Finalizado 2024</div>
+      <div class="edutit">Community Manager & Publicidad</div>
+      <div class="edusub">Coderhouse</div>
     </div>
-    <div class="edu-card fade-in">
-      <div class="edu-badge gray">Secundaria</div>
-      <div class="edu-title">Orientación en Economía y Administración</div>
-      <div class="edu-place">Centro de Estudios Ballester (C.E.B)</div>
+    <div class="educard fi">
+      <div class="badge gr">Finalizado</div>
+      <div class="edutit">Fotografía</div>
+      <div class="edusub">Formación independiente</div>
+    </div>
+    <div class="educard fi">
+      <div class="badge gr">Secundaria</div>
+      <div class="edutit">Orientación en Economía y Administración</div>
+      <div class="edusub">Centro de Estudios Ballester (C.E.B)</div>
     </div>
   </div>
-</section>
+</div>
 
-<hr class="divider">
+<hr class="div">
 
-<section id="contacto">
-  <div class="contact-box fade-in">
-    <div class="section-label" style="justify-content: center; margin-bottom: 1rem;">Contacto</div>
+<div class="wrap" id="contacto">
+  <div class="cbox fi">
+    <div class="slabel">Contacto</div>
     <h2>¿Hablamos?</h2>
-    <p>Si estás buscando un Meta Ads Manager o querés hablar de algún proyecto, escribime.</p>
-    <div class="contact-links">
-      <div class="contact-item">
-        📱 <span>15 6195 0644</span>
-      </div>
-      <div class="contact-item">
-        ✉️ <span>arielpalermo92@gmail.com</span>
-      </div>
-      <div class="contact-item">
-        📍 <span>General Pacheco, Tigre</span>
-      </div>
+    <p>Si estás buscando un Meta Ads Manager o querés debatir sobre asados, escribime.</p>
+    <div class="citems">
+      <div class="citem">📱 <span>15 6195 0644</span></div>
+      <div class="citem">✉️ <span>arielpalermo92@gmail.com</span></div>
+      <div class="citem">📍 <span>General Pacheco, Tigre</span></div>
     </div>
   </div>
-</section>
+</div>
 
-<footer>
-  <p>Ariel Palermo — Meta Ads Manager · General Pacheco, Buenos Aires</p>
-</footer>
+<footer>Ariel Palermo · Meta Ads Manager · Hecho sin una sola remera roja.</footer>
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('v'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fi').forEach(el => obs.observe(el));
 </script>
-
 </body>
 </html>
