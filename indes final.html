@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ariel Palermo — Meta Ads Manager</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #3B6D11;
+    --green-light: #639922;
+    --green-pale: rgba(99,153,34,0.12);
+    --orange: #BA7517;
+    --orange-light: #EF9F27;
+    --dark: #111110;
+    --dark2: #1c1c1a;
+    --text: #f0ede6;
+    --text-muted: #9a9792;
+    --text-dim: #5a5855;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.13);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--dark); color: var(--text);
+    font-family: 'DM Sans', sans-serif; font-weight: 300;
+    line-height: 1.7; overflow-x: hidden;
+  }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.1rem 2rem; display: flex; justify-content: center;
+    background: rgba(17,17,16,0.9); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-links { display: flex; gap: 1.75rem; }
+  .nav-links a {
+    font-size: 0.78rem; color: var(--text-dim); text-decoration: none;
+    letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--orange-light); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center;
+    padding: 7rem 2rem 4rem; position: relative; overflow: hidden;
+  }
+  .glow { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(80px); }
+  .glow-1 { width: 500px; height: 400px; top: -80px; left: 50%; transform: translateX(-50%); background: rgba(99,153,34,0.07); }
+  .glow-2 { width: 280px; height: 280px; bottom: 0; right: -40px; background: rgba(239,159,39,0.06); }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--green-light); margin-bottom: 1.75rem;
+    border: 1px solid rgba(99,153,34,0.25); background: rgba(99,153,34,0.08);
+    padding: 5px 14px; border-radius: 100px;
+  }
+  .hero-tag::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green-light); animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  h1 {
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: clamp(3rem, 11vw, 6.5rem);
+    line-height: 0.93; letter-spacing: -0.03em; margin-bottom: 1.5rem;
+  }
+  h1 .n1 { display: block; color: var(--text); }
+  h1 .nick {
+    display: block;
+    font-size: clamp(1.1rem, 3.5vw, 1.8rem);
+    font-weight: 600; letter-spacing: 0.01em;
+    color: var(--orange-light); margin: 0.15em 0;
+    font-style: italic;
+  }
+  h1 .n2 { display: block; color: var(--green-light); }
+  h1 .dot { color: var(--orange-light); }
+
+  .hero-sub {
+    font-size: clamp(0.92rem, 2.5vw, 1.05rem); color: var(--text-muted);
+    max-width: 440px; margin: 0 auto 2.5rem; font-style: italic;
+  }
+  .hero-cta { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+  .btn-p {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 0.85rem 1.75rem; background: var(--green-light); color: #111;
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem;
+    letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
+    border-radius: 6px; transition: background 0.2s, transform 0.15s;
+  }
+  .btn-p:hover { background: var(--green); transform: translateY(-2px); }
+  .btn-o {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 0.85rem 1.75rem; border: 1px solid var(--border-hover); color: var(--text-muted);
+    font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.82rem;
+    letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
+    border-radius: 6px; transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+  .btn-o:hover { border-color: var(--orange-light); color: var(--orange-light); transform: translateY(-2px); }
+
+  /* STATS */
+  .useless { margin-top: 4rem; padding-top: 2.5rem; border-top: 1px solid var(--border); width: 100%; max-width: 660px; }
+  .useless-label { font-size: 0.67rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 1.1rem; }
+  .sgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; }
+  @media(min-width:560px){ .sgrid { grid-template-columns: repeat(6, 1fr); } }
+  .scard {
+    background: var(--dark2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 0.9rem 0.6rem;
+    transition: border-color 0.2s, transform 0.2s; cursor: default;
+  }
+  .scard:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .snum { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.65rem; line-height: 1; margin-bottom: 4px; }
+  .snum.g { color: var(--green-light); }
+  .snum.o { color: var(--orange-light); }
+  .sdesc { font-size: 0.67rem; color: var(--text-dim); line-height: 1.35; }
+
+  /* SECTIONS */
+  .wrap { max-width: 680px; margin: 0 auto; padding: 5rem 2rem; text-align: center; }
+  .slabel {
+    font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--orange-light); margin-bottom: 0.6rem;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .slabel::before,.slabel::after { content:''; width:22px; height:1px; background:var(--orange-light); opacity:0.4; }
+  h2 {
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: clamp(1.8rem, 5vw, 2.7rem);
+    line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 2rem;
+  }
+  hr.div { border: none; border-top: 1px solid var(--border); max-width: 680px; margin: 0 auto; }
+
+  .about-box {
+    background: var(--dark2); border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.75rem; text-align: left;
+  }
+  .about-box p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0.9rem; }
+  .about-box p:last-child { margin-bottom: 0; }
+  .about-box strong { color: var(--text); font-weight: 500; }
+
+  .elist { display: flex; flex-direction: column; gap: 0.9rem; text-align: left; }
+  .ecard {
+    background: var(--dark2); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.6rem;
+    transition: border-color 0.25s, transform 0.2s;
+  }
+  .ecard:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .ecard.feat { border-color: rgba(99,153,34,0.3); }
+  .badge {
+    display: inline-block; font-size: 0.61rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 100px; margin-bottom: 0.7rem;
+  }
+  .badge.g { color:var(--green-light); background:var(--green-pale); border:1px solid rgba(99,153,34,0.25); }
+  .badge.gr { color:var(--text-dim); background:rgba(255,255,255,0.04); border:1px solid var(--border); }
+  .eco { font-size:0.76rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:2px; }
+  .etit { font-family:'Syne',sans-serif; font-weight:700; font-size:1.05rem; color:var(--text); margin-bottom:2px; }
+  .edate { font-size:0.76rem; color:var(--text-dim); margin-bottom:0.9rem; }
+  .ebullets { list-style:none; display:flex; flex-direction:column; gap:4px; }
+  .ebullets li { font-size:0.86rem; color:var(--text-muted); padding-left:1rem; position:relative; line-height:1.5; }
+  .ebullets li::before { content:'→'; position:absolute; left:0; color:var(--green-light); font-size:0.68rem; top:4px; }
+
+  .tgrid { display:grid; grid-template-columns:1fr 1fr; gap:0.65rem; text-align:left; }
+  .tcat { background:var(--dark2); border:1px solid var(--border); border-radius:12px; padding:1.1rem; transition:border-color 0.2s; }
+  .tcat:hover { border-color:var(--border-hover); }
+  .tcatl { font-size:0.64rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--orange-light); margin-bottom:0.6rem; }
+  .tags { display:flex; flex-wrap:wrap; gap:4px; }
+  .tag { font-size:0.72rem; color:var(--text-muted); background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:100px; padding:3px 9px; }
+  .tag.hl { color:var(--green-light); background:var(--green-pale); border-color:rgba(99,153,34,0.25); }
+
+  .edugrid { display:flex; flex-direction:column; gap:0.65rem; text-align:left; }
+  .educard { background:var(--dark2); border:1px solid var(--border); border-radius:12px; padding:1.15rem 1.4rem; transition:border-color 0.2s,transform 0.2s; }
+  .educard:hover { border-color:var(--border-hover); transform:translateY(-2px); }
+  .edutit { font-family:'Syne',sans-serif; font-weight:700; font-size:0.93rem; color:var(--text); margin-bottom:2px; }
+  .edusub { font-size:0.78rem; color:var(--text-dim); }
+
+  .cbox {
+    background:var(--dark2); border:1px solid rgba(99,153,34,0.2);
+    border-radius:20px; padding:3rem 1.75rem; position:relative; overflow:hidden;
+  }
+  .cbox::before {
+    content:''; position:absolute; top:-60px; left:50%; transform:translateX(-50%);
+    width:280px; height:180px;
+    background:radial-gradient(circle,rgba(99,153,34,0.08) 0%,transparent 70%);
+    pointer-events:none;
+  }
+  .cbox h2 { margin-bottom:0.6rem; }
+  .cbox p { color:var(--text-muted); font-size:0.92rem; margin-bottom:1.75rem; font-style:italic; }
+  .citems { display:flex; flex-direction:column; gap:0.55rem; align-items:center; }
+  .citem {
+    display:flex; align-items:center; gap:10px; font-size:0.86rem; color:var(--text-muted);
+    background:rgba(255,255,255,0.04); border:1px solid var(--border);
+    border-radius:8px; padding:0.6rem 1.2rem; width:100%; max-width:300px; justify-content:center;
+  }
+  .citem span { color:var(--text); }
+
+  footer { border-top:1px solid var(--border); padding:1.75rem 2rem; text-align:center; font-size:0.73rem; color:var(--text-dim); }
+
+  .fi { opacity:0; transform:translateY(18px); transition:opacity 0.5s ease,transform 0.5s ease; }
+  .fi.v { opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-links">
+    <a href="#sobre-mi">Sobre mí</a>
+    <a href="#experiencia">Experiencia</a>
+    <a href="#herramientas">Skills</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <div class="hero-tag">Disponible para trabajar</div>
+
+  <h1>
+    <span class="n1">Ariel</span>
+    <span class="nick">"Ossy"</span>
+    <span class="n2">Palermo<span class="dot">.</span></span>
+  </h1>
+
+  <p class="hero-sub">Meta Ads Manager. Gestiono campañas, segmento audiencias y optimizo métricas.</p>
+
+  <div class="hero-cta">
+    <a href="#contacto" class="btn-p">Hablemos →</a>
+    <a href="#experiencia" class="btn-o">Ver experiencia</a>
+  </div>
+
+  <div class="useless">
+    <div class="useless-label">Datos relevantes e irrelevantes en igual proporción</div>
+    <div class="sgrid">
+      <div class="scard">
+        <div class="snum g">4</div>
+        <div class="sdesc">años en marketing digital</div>
+      </div>
+      <div class="scard">
+        <div class="snum g">8</div>
+        <div class="sdesc">clientes activos</div>
+      </div>
+      <div class="scard">
+        <div class="snum o">85</div>
+        <div class="sdesc">goles en un año</div>
+      </div>
+      <div class="scard">
+        <div class="snum o">1</div>
+        <div class="sdesc">vino por asado</div>
+      </div>
+      <div class="scard">
+        <div class="snum g">0</div>
+        <div class="sdesc">remeras rojas</div>
+      </div>
+      <div class="scard">
+        <div class="snum o">2</div>
+        <div class="sdesc">viajes a Disney</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="wrap" id="sobre-mi">
+  <div class="slabel">Sobre mí</div>
+  <h2>¿Quién soy?</h2>
+  <div class="about-box fi">
+    <p>Soy <strong>Ariel Palermo</strong>, de General Pacheco, Tigre. Me dedico a la gestión de campañas en <strong>Meta Ads</strong> para clientes de distintos rubros.</p>
+    <p>Empecé en el mundo del marketing digital como Community Manager y estratega de contenido. Con el tiempo me fui especializando en la parte de <strong>performance</strong>: configuración de campañas, segmentación de audiencias, monitoreo de métricas y optimización.</p>
+    <p>Actualmente manejo campañas activas con distintos objetivos: reconocimiento de marca, conversión y generación de base de datos. Y sigo aprendiendo.</p>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="wrap" id="experiencia">
+  <div class="slabel">Experiencia</div>
+  <h2>Lo que hice<br>y lo que hago</h2>
+  <div class="elist">
+    <div class="ecard feat fi">
+      <div class="badge g">● Activo</div>
+      <div class="eco">Freelance</div>
+      <div class="etit">Meta Ads Manager</div>
+      <div class="edate">Mayo 2025 – presente</div>
+      <ul class="ebullets">
+        <li>Gestión de campañas activas en Meta Ads para clientes de distintos rubros: alimentos y bebidas, artistas musicales y estudios de producción.</li>
+        <li>Configuración de campañas con distintos objetivos: reconocimiento de marca, conversión y generación de base de datos.</li>
+        <li>Segmentación de audiencias y carga de creatividades alineadas a la estrategia de cada cliente.</li>
+        <li>Monitoreo diario de métricas clave (CTR, CPC, alcance) y reporte semanal de resultados.</li>
+      </ul>
+    </div>
+    <div class="ecard fi">
+      <div class="badge gr">Agencia</div>
+      <div class="eco">Un Metro Adelantado</div>
+      <div class="etit">Estratega de Contenido Digital</div>
+      <div class="edate">Marzo 2023 – presente</div>
+      <ul class="ebullets">
+        <li>Gestión de redes sociales para marcas como Noblex y Axion.</li>
+        <li>Producción de contenido para "Partido Chivo" (Canal Comba): coordinación en vivo y adaptación multiplataforma.</li>
+        <li>Participación en equipo creativo para campañas publicitarias.</li>
+      </ul>
+    </div>
+    <div class="ecard fi">
+      <div class="badge gr">Contenido</div>
+      <div class="eco">La Emprendeneta</div>
+      <div class="etit">Community Manager y Creador de Contenido</div>
+      <div class="edate">Marzo 2023 – presente</div>
+      <ul class="ebullets">
+        <li>Manejo de redes sociales para emprendedores y PyMEs.</li>
+        <li>Producción, grabación y edición de videos para redes sociales.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="wrap" id="herramientas">
+  <div class="slabel">Skills</div>
+  <h2>Con qué trabajo</h2>
+  <div class="tgrid">
+    <div class="tcat fi">
+      <div class="tcatl">// Meta & Google Ads</div>
+      <div class="tags">
+        <span class="tag hl">Meta Ads Manager</span>
+        <span class="tag hl">Meta Business Suite</span>
+        <span class="tag hl">Google Ads</span>
+        <span class="tag">Segmentación</span>
+        <span class="tag">CTR · CPC</span>
+      </div>
+    </div>
+    <div class="tcat fi">
+      <div class="tcatl">// Contenido & RRSS</div>
+      <div class="tags">
+        <span class="tag hl">Canva</span>
+        <span class="tag hl">CapCut</span>
+        <span class="tag">Instagram</span>
+        <span class="tag">Twitter / X</span>
+        <span class="tag">TikTok</span>
+        <span class="tag">YouTube Studio</span>
+        <span class="tag">Fotografía</span>
+      </div>
+    </div>
+    <div class="tcat fi">
+      <div class="tcatl">// IA & Office</div>
+      <div class="tags">
+        <span class="tag hl">ChatGPT</span>
+        <span class="tag hl">Claude</span>
+        <span class="tag">Gemini</span>
+        <span class="tag">Paquete Office</span>
+      </div>
+    </div>
+    <div class="tcat fi">
+      <div class="tcatl">// Idiomas</div>
+      <div class="tags">
+        <span class="tag hl">Español — nativo</span>
+        <span class="tag">Inglés — intermedio</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="wrap" id="educacion">
+  <div class="slabel">Educación</div>
+  <h2>Formación</h2>
+  <div class="edugrid">
+    <div class="educard fi">
+      <div class="badge g">Cursando</div>
+      <div class="edutit">Publicidad en Redes Avanzado: Meta y Google Ads</div>
+      <div class="edusub">Coderhouse</div>
+    </div>
+    <div class="educard fi">
+      <div class="badge gr">Finalizado 2024</div>
+      <div class="edutit">Community Manager & Publicidad</div>
+      <div class="edusub">Coderhouse</div>
+    </div>
+    <div class="educard fi">
+      <div class="badge gr">Finalizado</div>
+      <div class="edutit">Fotografía</div>
+      <div class="edusub">Formación independiente</div>
+    </div>
+    <div class="educard fi">
+      <div class="badge gr">Secundaria</div>
+      <div class="edutit">Orientación en Economía y Administración</div>
+      <div class="edusub">Centro de Estudios Ballester (C.E.B)</div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<div class="wrap" id="contacto">
+  <div class="cbox fi">
+    <div class="slabel">Contacto</div>
+    <h2>¿Hablamos?</h2>
+    <p>Si estás buscando un Meta Ads Manager o querés debatir sobre asados, escribime.</p>
+    <div class="citems">
+      <div class="citem">📱 <span>15 6195 0644</span></div>
+      <div class="citem">✉️ <span>arielpalermo92@gmail.com</span></div>
+      <div class="citem">📍 <span>General Pacheco, Tigre</span></div>
+    </div>
+  </div>
+</div>
+
+<footer>Ariel Palermo · Meta Ads Manager · Hecho sin una sola remera roja.</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('v'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
